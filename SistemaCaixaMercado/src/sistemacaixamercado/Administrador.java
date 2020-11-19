@@ -1,5 +1,5 @@
 package sistemacaixamercado;
 
-public class Administrador {
+public class Administrador extends Operador {
     
 }
