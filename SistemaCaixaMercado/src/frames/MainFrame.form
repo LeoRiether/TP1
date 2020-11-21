@@ -33,13 +33,13 @@
                   <Component id="jLabel1" alignment="1" min="-2" pref="504" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jButton2" min="-2" pref="243" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="243" max="-2" attributes="0"/>
+                          <Component id="produtosBtn" min="-2" pref="243" max="-2" attributes="0"/>
+                          <Component id="compraBtn" min="-2" pref="243" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" pref="243" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="243" max="-2" attributes="0"/>
+                          <Component id="estatisticasBtn" min="-2" pref="243" max="-2" attributes="0"/>
+                          <Component id="clientesBtn" min="-2" pref="243" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -53,14 +53,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="17" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" pref="241" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="1" min="-2" pref="241" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="clientesBtn" alignment="1" min="-2" pref="241" max="-2" attributes="0"/>
+                  <Component id="produtosBtn" min="-2" pref="241" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton4" alignment="3" min="-2" pref="241" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" pref="241" max="-2" attributes="0"/>
+                  <Component id="compraBtn" alignment="3" min="-2" pref="241" max="-2" attributes="0"/>
+                  <Component id="estatisticasBtn" alignment="3" min="-2" pref="241" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -68,7 +68,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="estatisticasBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -79,7 +79,7 @@
         <Property name="text" type="java.lang.String" value="Estat&#xed;sticas"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="produtosBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -90,10 +90,10 @@
         <Property name="text" type="java.lang.String" value="Produtos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="produtosBtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="clientesBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -104,7 +104,7 @@
         <Property name="text" type="java.lang.String" value="Clientes"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="compraBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>

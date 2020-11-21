@@ -6,6 +6,16 @@
 package frames;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import javax.swing.plaf.basic.BasicLookAndFeel;
+
+class Theme {
+    static void install() {
+        FlatDarkLaf.install();
+    }
+    static BasicLookAndFeel theme() {
+        return new FlatDarkLaf();
+    }
+}
 
 /**
  *
@@ -17,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        FlatDarkLaf.install();
+        Theme.install();
         initComponents();
     }
 
@@ -30,36 +40,36 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        estatisticasBtn = new javax.swing.JButton();
+        produtosBtn = new javax.swing.JButton();
+        clientesBtn = new javax.swing.JButton();
+        compraBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caixa de Mercado");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/dairy-products-64.png")).getImage());
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/analytics-64.png"))); // NOI18N
-        jButton1.setText("Estatísticas");
+        estatisticasBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        estatisticasBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/analytics-64.png"))); // NOI18N
+        estatisticasBtn.setText("Estatísticas");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dairy-products-64.png"))); // NOI18N
-        jButton2.setText("Produtos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        produtosBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        produtosBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dairy-products-64.png"))); // NOI18N
+        produtosBtn.setText("Produtos");
+        produtosBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                produtosBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clients-64.png"))); // NOI18N
-        jButton3.setText("Clientes");
+        clientesBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        clientesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clients-64.png"))); // NOI18N
+        clientesBtn.setText("Clientes");
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/online-shopping-64.png"))); // NOI18N
-        jButton4.setText("Nova Compra");
+        compraBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        compraBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/online-shopping-64.png"))); // NOI18N
+        compraBtn.setText("Nova Compra");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -76,12 +86,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(produtosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(compraBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(estatisticasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -90,29 +100,29 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clientesBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(produtosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(compraBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(estatisticasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void produtosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtosBtnActionPerformed
+        new ProdutosFrame().setVisible(true);
+    }//GEN-LAST:event_produtosBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         try {
-            javax.swing.UIManager.setLookAndFeel(new FlatDarkLaf());
+            javax.swing.UIManager.setLookAndFeel(Theme.theme());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -148,10 +158,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton clientesBtn;
+    private javax.swing.JButton compraBtn;
+    private javax.swing.JButton estatisticasBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton produtosBtn;
     // End of variables declaration//GEN-END:variables
 }
