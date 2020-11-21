@@ -3,7 +3,6 @@ package sistemacaixamercado;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class Carrinho {
     ArrayList<ItemCarrinho> itens;
     HashMap<Produto, Integer> posicoes;
