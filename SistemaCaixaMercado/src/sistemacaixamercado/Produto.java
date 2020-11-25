@@ -1,10 +1,12 @@
 package sistemacaixamercado;
 
+import java.io.Serializable;
+
 /**
  * Representa um produto do mercado
  * @author Leonardo
  */
-public class Produto {
+public class Produto implements Serializable {
     private int id;
     protected int preco; // preço em centavos
     protected String nome;

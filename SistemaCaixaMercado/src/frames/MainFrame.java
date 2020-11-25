@@ -122,7 +122,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void produtosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtosBtnActionPerformed
-        new ProdutosFrame().setVisible(true);
+        new ProdutosFrame(mercado.getBd()).setVisible(true);
     }//GEN-LAST:event_produtosBtnActionPerformed
 
     private void compraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBtnActionPerformed

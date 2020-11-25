@@ -1,5 +1,6 @@
 package sistemacaixamercado;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Random;
  *
  * @author Leonardo
  */
-public class ProdutoComDesconto extends Produto {
+public class ProdutoComDesconto extends Produto implements Serializable {
 
     private int probabilidade; // probabilidade de desconto
     private float desconto;
