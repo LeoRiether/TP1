@@ -10,11 +10,13 @@ public class Produto implements Serializable {
     private int id;
     protected int preco; // preço em centavos
     protected String nome;
+    protected String icone;
 
-    public Produto(int id, int preco, String nome) {
+    public Produto(int id, int preco, String nome, String icone) {
         this.id = id;
         this.preco = preco;
         this.nome = nome;
+        this.icone = icone;
     }
 
     public int getPreco() {
@@ -31,6 +33,10 @@ public class Produto implements Serializable {
     
     public String getNome() {
         return nome;
+    }
+
+    public String getIcone() {
+        return icone;
     }
     
     /**

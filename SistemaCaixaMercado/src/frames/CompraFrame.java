@@ -17,6 +17,7 @@
 package frames;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import sistemacaixamercado.Carrinho;
 import sistemacaixamercado.Produto;
 
@@ -45,9 +46,20 @@ public class CompraFrame extends javax.swing.JFrame {
     public CompraFrame(ArrayList<Produto> produtos, Callback cb) {
         this.produtos = produtos;
         this.carrinho = new Carrinho();
+        carrinho.add(new Produto(1, 500, "Leite", "leite"), 2);
         this.cb = cb;
-        this.cb.callback(carrinho);
         initComponents();
+        
+        initItensList();
+        
+    }
+    
+    private void initItensList() {
+        DefaultListModel model = new DefaultListModel();
+        for (Object obj : carrinho.getItens()) {
+            model.addElement(obj);
+        }
+        itensList.setModel(model);
     }
 
     /**
@@ -61,22 +73,19 @@ public class CompraFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        itensList = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/online-shopping-32.png"))); // NOI18N
         jLabel1.setText("Nova Compra");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        itensList.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        itensList.setCellRenderer(new ItemCarrinhoRenderer());
+        jScrollPane1.setViewportView(itensList);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/market.jpg"))); // NOI18N
 
@@ -107,9 +116,9 @@ public class CompraFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<sistemacaixamercado.ItemCarrinho> itensList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

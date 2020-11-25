@@ -5,20 +5,21 @@
  */
 package frames;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 import sistemacaixamercado.SistemaCaixaMercado;
 
 class Theme {
     static void install() {
-        FlatDarkLaf.install();
+        FlatLightLaf.install();
     }
     static BasicLookAndFeel theme() {
-        return new FlatDarkLaf();
+        return new FlatLightLaf();
     }
 }
 
 /**
+ * JFrame da tela principal
  *
  * @author Leonardo
  */
@@ -47,7 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         produtosBtn = new javax.swing.JButton();
         clientesBtn = new javax.swing.JButton();
         compraBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caixa de Mercado");
@@ -79,10 +80,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Caixa");
-        jLabel1.setToolTipText("");
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Caixa");
+        titleLabel.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +92,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(produtosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,7 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(clientesBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,7 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton clientesBtn;
     private javax.swing.JButton compraBtn;
     private javax.swing.JButton estatisticasBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton produtosBtn;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,8 +14,8 @@ public class ProdutoComDesconto extends Produto implements Serializable {
     private float desconto;
     Random rng;
 
-    public ProdutoComDesconto(int probabilidade, float desconto, Random rng, int id, int preco, String nome) {
-        super(id, preco, nome);
+    public ProdutoComDesconto(int probabilidade, float desconto, Random rng, int id, int preco, String nome, String icone) {
+        super(id, preco, nome, icone);
         this.probabilidade = probabilidade;
         this.desconto = desconto;
         this.rng = rng;
