@@ -7,6 +7,7 @@ package frames;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.plaf.basic.BasicLookAndFeel;
+import sistemacaixamercado.SistemaCaixaMercado;
 
 class Theme {
     static void install() {
@@ -22,11 +23,13 @@ class Theme {
  * @author Leonardo
  */
 public class MainFrame extends javax.swing.JFrame {
+    private SistemaCaixaMercado mercado;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+        mercado = new SistemaCaixaMercado();
         Theme.install();
         initComponents();
     }
@@ -70,6 +73,11 @@ public class MainFrame extends javax.swing.JFrame {
         compraBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         compraBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/online-shopping-64.png"))); // NOI18N
         compraBtn.setText("Nova Compra");
+        compraBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compraBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -116,6 +124,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void produtosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtosBtnActionPerformed
         new ProdutosFrame().setVisible(true);
     }//GEN-LAST:event_produtosBtnActionPerformed
+
+    private void compraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBtnActionPerformed
+        new CompraFrame(mercado.getProdutos(), carrinho -> {
+            
+        }).setVisible(true);
+    }//GEN-LAST:event_compraBtnActionPerformed
 
     /**
      * @param args the command line arguments

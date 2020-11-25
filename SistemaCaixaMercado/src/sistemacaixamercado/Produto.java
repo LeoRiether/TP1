@@ -7,10 +7,12 @@ package sistemacaixamercado;
 public class Produto {
     private int id;
     protected int preco; // preço em centavos
+    protected String nome;
 
-    public Produto(int id, int preco) {
+    public Produto(int id, int preco, String nome) {
         this.id = id;
         this.preco = preco;
+        this.nome = nome;
     }
 
     public int getPreco() {
@@ -23,6 +25,10 @@ public class Produto {
 
     public int getId() {
         return id;
+    }
+    
+    public String getNome() {
+        return nome;
     }
     
     /**
