@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BancoDeDados {
 
@@ -29,7 +30,7 @@ public class BancoDeDados {
     }
 
     /**
-     * Carrega os produtos
+     * Carrega os produtos do arquivo correspondente.
      *
      * @return Produtos cadastrados
      * @throws IOException
@@ -37,7 +38,16 @@ public class BancoDeDados {
      */
     public ArrayList<Produto> loadProdutos() throws IOException, ClassNotFoundException {
         try {
-            return (ArrayList<Produto>) loadFromFile(produtosFile);
+            ArrayList<Produto> produtos = (ArrayList<Produto>) loadFromFile(produtosFile);
+
+            Random rng = new Random();
+            for (Produto p : produtos) {
+                if (p instanceof ProdutoComDesconto) {
+                    ((ProdutoComDesconto) p).setRng(rng);
+                }
+            }
+            
+            return produtos;
         } catch (java.io.FileNotFoundException e) {
             return new ArrayList<>();
         }

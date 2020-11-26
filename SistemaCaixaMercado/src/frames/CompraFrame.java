@@ -16,6 +16,7 @@
  */
 package frames;
 
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -50,7 +51,6 @@ public class CompraFrame extends javax.swing.JFrame {
     public CompraFrame(ArrayList<Produto> produtos, Callback cb) {
         this.produtos = produtos;
         this.carrinho = new Carrinho();
-        carrinho.add(new Produto(1, 500, "Leite", "leite"), 2);
         this.cb = cb;
         initComponents();
 
@@ -78,6 +78,9 @@ public class CompraFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         itensList = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
+        addComboBox = new javax.swing.JComboBox<>();
+        addBtn = new javax.swing.JButton();
+        doneBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Nova Compra");
@@ -99,6 +102,20 @@ public class CompraFrame extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/market.jpg"))); // NOI18N
 
+        addComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        addBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        addBtn.setText("+");
+        addBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        doneBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        doneBtn.setText("Concluir");
+        doneBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doneBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +124,13 @@ public class CompraFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(addComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(doneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2))
         );
@@ -117,7 +140,12 @@ public class CompraFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addComboBox)
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(doneBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -125,6 +153,11 @@ public class CompraFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void close() {
+        setVisible(false);
+        dispose();
+    }
+    
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         String[] options = { "Sim", "Não" };
         int chosen = JOptionPane.showOptionDialog(
@@ -135,12 +168,20 @@ public class CompraFrame extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE, 
                 null, options, options[1]);
         if (chosen == JOptionPane.YES_OPTION) {
-            setVisible(false);
-            dispose();
+            close();
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void doneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneBtnActionPerformed
+        cb.callback(carrinho);
+        JOptionPane.showMessageDialog(this, "Compra concluída com sucesso!", "", JOptionPane.INFORMATION_MESSAGE);
+        close();
+    }//GEN-LAST:event_doneBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
+    private javax.swing.JComboBox<String> addComboBox;
+    private javax.swing.JButton doneBtn;
     private javax.swing.JList<sistemacaixamercado.ItemCarrinho> itensList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

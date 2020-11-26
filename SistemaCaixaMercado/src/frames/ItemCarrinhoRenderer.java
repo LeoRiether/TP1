@@ -17,6 +17,7 @@
 package frames;
 
 import java.awt.Component;
+import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -40,17 +41,13 @@ public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
 
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        //Get the selected index. (The index param isn't
-        //always valid, so just use the value.)
-        //int selectedIndex = ((Integer) value).intValue();
-
-        if (isSelected) {
+        /*if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
         } else {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
-        }
+        }*/
 
         ItemCarrinho item = (ItemCarrinho) value;
 
@@ -62,7 +59,7 @@ public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
         } else {
             try {
                 setIcon(new javax.swing.ImageIcon(new URL(icone)));
-            } catch (Exception e) {
+            } catch (MalformedURLException e) {
                 // no icon
                 // wasn't meant to be
             }

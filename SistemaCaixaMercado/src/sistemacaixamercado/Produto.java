@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 /**
  * Representa um produto do mercado
+ *
  * @author Leonardo
  */
 public class Produto implements Serializable {
+
     private int id;
     protected int preco; // preço em centavos
     protected String nome;
@@ -30,7 +32,7 @@ public class Produto implements Serializable {
     public int getId() {
         return id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -38,9 +40,10 @@ public class Produto implements Serializable {
     public String getIcone() {
         return icone;
     }
-    
+
     /**
      * No caso de um Produto (não um ProdutoComDesconto), apenas retorna o preço
+     *
      * @return O preço do produto
      */
     public int aplicarDesconto() {
@@ -68,7 +71,7 @@ public class Produto implements Serializable {
         final Produto other = (Produto) obj;
         return this.id == other.id;
     }
- 
+
     /**
      * @return uma string do preço do tipo "R$10,00", ou "R$0,50"
      */

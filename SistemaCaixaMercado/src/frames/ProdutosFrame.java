@@ -16,21 +16,86 @@
  */
 package frames;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.OptionalInt;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import sistemacaixamercado.BancoDeDados;
+import sistemacaixamercado.Produto;
+import sistemacaixamercado.ProdutoComDesconto;
 
 /**
+ * Tela para inserção, remoção e edição dos produtos cadastrados
  *
  * @author Leonardo
  */
 public class ProdutosFrame extends javax.swing.JFrame {
-    private BancoDeDados bd;
+
+    private final BancoDeDados bd;
+    private ArrayList<Produto> produtos;
 
     /**
      * Creates new form ProdutosFrame
+     *
+     * @param bd BancoDeDados que salva as mudanças feitas
+     * @param produtos lista dos produtos atuais
      */
-    public ProdutosFrame(BancoDeDados bd) {
+    public ProdutosFrame(BancoDeDados bd, ArrayList<Produto> produtos) {
         this.bd = bd;
+        this.produtos = produtos;
         initComponents();
+        initTable();
+    }
+
+    private void clearFields() {
+        JTextField[] fields = new JTextField[]{
+            nomeField, descontoField,
+            probField, iconeField
+        };
+
+        for (JTextField field : fields) {
+            field.setText("");
+        }
+
+    }
+
+    /**
+     * Cria um array de colunas da tabela de produtos a partir de um Produto
+     *
+     * @return as colunas criadas
+     */
+    private Object[] produto2Row(Produto p) {
+        if (p == null) {
+            return new Object[]{
+                "?", "?", "?", "?"
+            };
+        }
+
+        String descontoStr;
+        if (p instanceof ProdutoComDesconto) {
+            var d = (ProdutoComDesconto) p;
+            descontoStr = d.getDesconto() + " (P = " + d.getProbabilidade() + ")";
+        } else {
+            descontoStr = "-";
+        }
+
+        return new Object[]{
+            p.getNome(),
+            p.strPreco(),
+            descontoStr,
+            p.getId() + ""
+        };
+    }
+
+    private void initTable() {
+        var model = (DefaultTableModel) table.getModel();
+        model.setNumRows(0);
+
+        for (Produto p : produtos) {
+            model.addRow(produto2Row(p));
+        }
     }
 
     /**
@@ -42,23 +107,287 @@ public class ProdutosFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        nomeField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        nomeField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        descontoField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        probField = new javax.swing.JTextField();
+        addBtn = new javax.swing.JButton();
+        rmBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        iconeField = new javax.swing.JTextField();
+        precoSpinner = new javax.swing.JSpinner();
+
+        nomeField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nomeField2.setToolTipText("nome do produto");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setLabelFor(nomeField);
+        jLabel4.setText("Preço");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Produtos");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/dairy-products-64.png")).getImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dairy-products.png"))); // NOI18N
+        jLabel1.setText("Produtos");
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Leite", "R$5,00", "10% (P = 50%)", "1"},
+                {"Carne", "R$50,00", "50% (P = 10%)", "2"},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Preço", "Desconto", "ID"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(table);
+
+        nomeField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nomeField.setToolTipText("nome do produto");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setLabelFor(nomeField);
+        jLabel2.setText("Nome");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setLabelFor(nomeField);
+        jLabel3.setText("Preço (centavos)");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setLabelFor(nomeField);
+        jLabel5.setText("Desconto");
+
+        descontoField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        descontoField.setToolTipText("desconto");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setLabelFor(nomeField);
+        jLabel6.setText("Probabilidade");
+
+        probField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        probField.setToolTipText("probabilidade de desconto");
+
+        addBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addBtn.setText("Adicionar");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
+
+        rmBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rmBtn.setText("Remover");
+        rmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmBtnActionPerformed(evt);
+            }
+        });
+
+        editBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editBtn.setText("Editar");
+        editBtn.setToolTipText("");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setLabelFor(nomeField);
+        jLabel7.setText("Ícone");
+
+        iconeField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        iconeField.setToolTipText("desconto");
+
+        precoSpinner.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(precoSpinner)))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(probField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(descontoField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(iconeField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nomeField)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addComponent(descontoField, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addComponent(iconeField, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(probField)
+                    .addComponent(precoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmBtnActionPerformed
+        int selected = table.getSelectedRow();
+        if (selected < 0) {
+            return;
+        }
+
+        produtos.remove(selected);
+
+        var model = (DefaultTableModel) table.getModel();
+        model.removeRow(selected);
+    }//GEN-LAST:event_rmBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            bd.saveProdutos(produtos);
+            setVisible(false);
+            dispose();
+        } catch (IOException ex) {
+            Warning.show("Não foi possível salvar as mudanças! Erro: " + ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        String nome = nomeField.getText();
+        int preco = (Integer) precoSpinner.getValue();
+        String sDesconto = descontoField.getText();
+        String sProb = probField.getText();
+        String icone = iconeField.getText();
+
+        OptionalInt maxId = produtos.stream().mapToInt(Produto::getId).max();
+        int id = maxId.orElse(0) + 1;
+
+        Produto p;
+        if (sDesconto.isBlank()) {
+            // Produto sem desconto
+            p = new Produto(id, preco, nome, icone);
+        } else {
+            p = (Produto) new ProdutoComDesconto(
+                    Integer.parseInt(sProb),
+                    Float.parseFloat(sDesconto),
+                    id,
+                    preco,
+                    nome,
+                    icone
+            );
+        }
+
+        produtos.add(p);
+
+        var model = (DefaultTableModel) table.getModel();
+        model.addRow(produto2Row(p));
+
+        clearFields();
+    }//GEN-LAST:event_addBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
+    private javax.swing.JTextField descontoField;
+    private javax.swing.JButton editBtn;
+    private javax.swing.JTextField iconeField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField nomeField;
+    private javax.swing.JTextField nomeField2;
+    private javax.swing.JSpinner precoSpinner;
+    private javax.swing.JTextField probField;
+    private javax.swing.JButton rmBtn;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

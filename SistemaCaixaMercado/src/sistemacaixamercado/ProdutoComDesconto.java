@@ -12,13 +12,12 @@ public class ProdutoComDesconto extends Produto implements Serializable {
 
     private int probabilidade; // probabilidade de desconto
     private float desconto;
-    Random rng;
+    private transient Random rng;
 
-    public ProdutoComDesconto(int probabilidade, float desconto, Random rng, int id, int preco, String nome, String icone) {
+    public ProdutoComDesconto(int probabilidade, float desconto, int id, int preco, String nome, String icone) {
         super(id, preco, nome, icone);
         this.probabilidade = probabilidade;
         this.desconto = desconto;
-        this.rng = rng;
     }
 
     /**
@@ -29,8 +28,22 @@ public class ProdutoComDesconto extends Produto implements Serializable {
     public int aplicarDesconto() {
         int r = rng.nextInt(100);
         if (r < probabilidade) {
-            return Math.round(desconto * (float) preco);
+            return Math.round((desconto / 100) * (float) preco);
         }
         return preco;
     }
+
+    public void setRng(Random rng) {
+        this.rng = rng;
+    }
+
+    public int getProbabilidade() {
+        return probabilidade;
+    }
+
+    public float getDesconto() {
+        return desconto;
+    }
+    
+    
 }
