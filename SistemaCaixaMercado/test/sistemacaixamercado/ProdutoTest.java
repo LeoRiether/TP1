@@ -43,13 +43,13 @@ public class ProdutoTest {
     @Test
     public void testStrPreco() {
         System.out.println("strPreco");
-        Produto instance = new Produto(0, 1000, "A");
+        Produto instance = new Produto(0, 1000, "A", "");
         assertEquals("R$10,00", instance.strPreco());
         
-        instance = new Produto(1, 50, "B");
+        instance = new Produto(1, 50, "B", "");
         assertEquals("RS0,50", instance.strPreco());
         
-        instance = new Produto(1, 5, "C");
+        instance = new Produto(1, 5, "C", "");
         assertEquals("RS0,05", instance.strPreco());
     }
     
