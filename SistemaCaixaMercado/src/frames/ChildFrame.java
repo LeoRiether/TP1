@@ -16,10 +16,24 @@
  */
 package frames;
 
+import javax.swing.JFrame;
+
 /**
- * O método `call` é chamado quando uma janela é fechada
+ * Representa um JFrame que é "filho" de um `parent`. 
+ * Ao chamar `setVisible(true)` o pai é escondido, e `setVisible(false)` volta a
+ * mostrar o pai.
  * @author Leonardo
  */
-public interface OnCloseHandler {
-    public void call();
+public class ChildFrame extends JFrame {
+    private JFrame parent;
+    
+    public ChildFrame(JFrame parent) {
+        this.parent = parent;
+    }
+    
+    @Override
+    public void setVisible(boolean visibility) {
+        super.setVisible(visibility);
+        parent.setVisible(!visibility);
+    }
 }

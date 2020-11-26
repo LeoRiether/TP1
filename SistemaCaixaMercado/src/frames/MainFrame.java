@@ -32,7 +32,9 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         mercado = new SistemaCaixaMercado();
         Theme.install();
+        
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -123,19 +125,13 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void produtosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtosBtnActionPerformed
-        var frame = new ProdutosFrame(mercado.getBd(), mercado.getProdutos(), () -> {
-            setVisible(true);
-        });
-        frame.setVisible(true);
-        this.setVisible(false);
+        new ProdutosFrame(this, mercado.getBd(), mercado.getProdutos()).setVisible(true);
     }//GEN-LAST:event_produtosBtnActionPerformed
 
     private void compraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBtnActionPerformed
-        var frame = new CompraFrame(mercado.getProdutos(), carrinho -> {
-            setVisible(true);
-        });
-        frame.setVisible(true);
-        this.setVisible(false);
+        new CompraFrame(this, mercado.getProdutos(), carrinho -> {
+            
+        }).setVisible(true);
     }//GEN-LAST:event_compraBtnActionPerformed
 
     /**

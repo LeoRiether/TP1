@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.OptionalInt;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import sistemacaixamercado.BancoDeDados;
@@ -31,23 +32,28 @@ import sistemacaixamercado.ProdutoComDesconto;
  *
  * @author Leonardo
  */
-public class ProdutosFrame extends javax.swing.JFrame {
+public class ProdutosFrame extends ChildFrame {
 
+    private final JFrame parent;
     private final BancoDeDados bd;
     private ArrayList<Produto> produtos;
-    private final OnCloseHandler onClose;
 
     /**
      * Creates new form ProdutosFrame
      *
+     * @param parent frame "pai"
      * @param bd BancoDeDados que salva as mudanças feitas
      * @param produtos lista dos produtos atuais
      */
-    public ProdutosFrame(BancoDeDados bd, ArrayList<Produto> produtos, OnCloseHandler onClose) {
+    public ProdutosFrame(JFrame parent, BancoDeDados bd, ArrayList<Produto> produtos) {
+        super(parent);
+        this.parent = parent;
         this.bd = bd;
         this.produtos = produtos;
-        this.onClose = onClose;
+        
         initComponents();
+        setLocationRelativeTo(null);
+        
         initTable();
     }
 
@@ -295,11 +301,12 @@ public class ProdutosFrame extends javax.swing.JFrame {
                         .addComponent(iconeField, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(probField)
-                    .addComponent(precoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(precoSpinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(probField)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,8 +339,8 @@ public class ProdutosFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try {
             bd.saveProdutos(produtos);
-            onClose.call();
-            setVisible(false);
+            this.setVisible(false);
+            parent.setVisible(true);
             dispose();
         } catch (IOException ex) {
             Warning.show("Não foi possível salvar as mudanças! Erro: " + ex);

@@ -20,6 +20,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistemacaixamercado.Carrinho;
 import sistemacaixamercado.Produto;
@@ -41,7 +42,7 @@ interface Callback {
  *
  * @author Leonardo
  */
-public class CompraFrame extends javax.swing.JFrame {
+public class CompraFrame extends ChildFrame {
 
     private ArrayList<Produto> produtos;
     private Carrinho carrinho;
@@ -50,11 +51,14 @@ public class CompraFrame extends javax.swing.JFrame {
     /**
      * Creates new form CompraFrame
      */
-    public CompraFrame(ArrayList<Produto> produtos, Callback cb) {
+    public CompraFrame(JFrame parent, ArrayList<Produto> produtos, Callback cb) {
+        super(parent);
         this.produtos = produtos;
         this.carrinho = new Carrinho();
         this.cb = cb;
+
         initComponents();
+        setLocationRelativeTo(null);
         
         updateItensList();
         addRng();
@@ -166,6 +170,7 @@ public class CompraFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void close() {
+        cb.callback(carrinho);
         setVisible(false);
         dispose();
     }
@@ -180,12 +185,12 @@ public class CompraFrame extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE,
                 null, options, options[1]);
         if (chosen == JOptionPane.YES_OPTION) {
+            carrinho = null;
             close();
         }
     }//GEN-LAST:event_formWindowClosing
 
     private void doneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneBtnActionPerformed
-        cb.callback(carrinho);
         JOptionPane.showMessageDialog(this, "Compra concluída com sucesso!", "", JOptionPane.INFORMATION_MESSAGE);
         close();
     }//GEN-LAST:event_doneBtnActionPerformed
