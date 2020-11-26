@@ -35,6 +35,7 @@ public class ProdutosFrame extends javax.swing.JFrame {
 
     private final BancoDeDados bd;
     private ArrayList<Produto> produtos;
+    private final OnCloseHandler onClose;
 
     /**
      * Creates new form ProdutosFrame
@@ -42,9 +43,10 @@ public class ProdutosFrame extends javax.swing.JFrame {
      * @param bd BancoDeDados que salva as mudanças feitas
      * @param produtos lista dos produtos atuais
      */
-    public ProdutosFrame(BancoDeDados bd, ArrayList<Produto> produtos) {
+    public ProdutosFrame(BancoDeDados bd, ArrayList<Produto> produtos, OnCloseHandler onClose) {
         this.bd = bd;
         this.produtos = produtos;
+        this.onClose = onClose;
         initComponents();
         initTable();
     }
@@ -59,6 +61,7 @@ public class ProdutosFrame extends javax.swing.JFrame {
             field.setText("");
         }
 
+        precoSpinner.setValue(0);
     }
 
     /**
@@ -329,6 +332,7 @@ public class ProdutosFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try {
             bd.saveProdutos(produtos);
+            onClose.call();
             setVisible(false);
             dispose();
         } catch (IOException ex) {
@@ -351,6 +355,7 @@ public class ProdutosFrame extends javax.swing.JFrame {
             // Produto sem desconto
             p = new Produto(id, preco, nome, icone);
         } else {
+            // Produto com desconto
             p = (Produto) new ProdutoComDesconto(
                     Integer.parseInt(sProb),
                     Float.parseFloat(sDesconto),

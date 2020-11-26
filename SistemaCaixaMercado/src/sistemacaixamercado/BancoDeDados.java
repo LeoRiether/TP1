@@ -38,16 +38,7 @@ public class BancoDeDados {
      */
     public ArrayList<Produto> loadProdutos() throws IOException, ClassNotFoundException {
         try {
-            ArrayList<Produto> produtos = (ArrayList<Produto>) loadFromFile(produtosFile);
-
-            Random rng = new Random();
-            for (Produto p : produtos) {
-                if (p instanceof ProdutoComDesconto) {
-                    ((ProdutoComDesconto) p).setRng(rng);
-                }
-            }
-            
-            return produtos;
+           return (ArrayList<Produto>) loadFromFile(produtosFile);
         } catch (java.io.FileNotFoundException e) {
             return new ArrayList<>();
         }

@@ -123,13 +123,19 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void produtosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtosBtnActionPerformed
-        new ProdutosFrame(mercado.getBd(), mercado.getProdutos()).setVisible(true);
+        var frame = new ProdutosFrame(mercado.getBd(), mercado.getProdutos(), () -> {
+            setVisible(true);
+        });
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_produtosBtnActionPerformed
 
     private void compraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBtnActionPerformed
-        new CompraFrame(mercado.getProdutos(), carrinho -> {
-            
-        }).setVisible(true);
+        var frame = new CompraFrame(mercado.getProdutos(), carrinho -> {
+            setVisible(true);
+        });
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_compraBtnActionPerformed
 
     /**

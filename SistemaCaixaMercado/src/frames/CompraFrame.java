@@ -18,10 +18,12 @@ package frames;
 
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import sistemacaixamercado.Carrinho;
 import sistemacaixamercado.Produto;
+import sistemacaixamercado.ProdutoComDesconto;
 
 /**
  * Um Callback é utilizado para mandar dados da compra realizada para a janela
@@ -53,8 +55,9 @@ public class CompraFrame extends javax.swing.JFrame {
         this.carrinho = new Carrinho();
         this.cb = cb;
         initComponents();
-
+        
         updateItensList();
+        addRng();
     }
 
     private void updateItensList() {
@@ -63,6 +66,15 @@ public class CompraFrame extends javax.swing.JFrame {
             model.addElement(obj);
         }
         itensList.setModel(model);
+    }
+
+    private void addRng() {
+        Random rng = new Random();
+        for (Produto p : produtos) {
+            if (p instanceof ProdutoComDesconto) {
+                ((ProdutoComDesconto) p).setRng(rng);
+            }
+        }
     }
 
     /**
@@ -157,15 +169,15 @@ public class CompraFrame extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }
-    
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        String[] options = { "Sim", "Não" };
+        String[] options = {"Sim", "Não"};
         int chosen = JOptionPane.showOptionDialog(
-                this, 
-                "Deseja cancelar a compra?", 
-                "Atenção", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.WARNING_MESSAGE, 
+                this,
+                "Deseja cancelar a compra?",
+                "Atenção",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
                 null, options, options[1]);
         if (chosen == JOptionPane.YES_OPTION) {
             close();
