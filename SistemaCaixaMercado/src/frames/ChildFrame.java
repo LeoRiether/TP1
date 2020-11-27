@@ -24,8 +24,8 @@ import javax.swing.JFrame;
  * mostrar o pai.
  * @author Leonardo
  */
-public class ChildFrame extends JFrame {
-    private JFrame parent;
+public abstract class ChildFrame extends JFrame {
+    private final JFrame parent;
     
     public ChildFrame(JFrame parent) {
         this.parent = parent;

@@ -16,7 +16,6 @@
  */
 package frames;
 
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.DefaultListModel;
