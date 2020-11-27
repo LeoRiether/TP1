@@ -176,7 +176,7 @@ public class CompraFrame extends ChildFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Fecha a tela sem o alerta se o carrinho está vazio
-        if (carrinho.getItens().size() == 0) {
+        if (carrinho.getItens().isEmpty()) {
             close();
             return;
         }
