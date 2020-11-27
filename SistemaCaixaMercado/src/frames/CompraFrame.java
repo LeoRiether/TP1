@@ -175,6 +175,12 @@ public class CompraFrame extends ChildFrame {
     }
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // Fecha a tela sem o alerta se o carrinho está vazio
+        if (carrinho.getItens().size() == 0) {
+            close();
+            return;
+        }
+        
         String[] options = {"Sim", "Não"};
         int chosen = JOptionPane.showOptionDialog(
                 this,
