@@ -36,7 +36,7 @@ public class ItemCarrinho {
         this.qtd -= x;
     }
     
-    public int getQtd(int x) {
+    public int getQtd() {
         return this.qtd;
     }
     public void setQtd(int x) {
