@@ -76,6 +76,10 @@ public class Produto implements Serializable {
      * @return uma string do preço do tipo "R$10,00", ou "R$0,50"
      */
     public String strPreco() {
+        return Produto.strPreco(preco);
+    }
+    
+    public static String strPreco(int preco) {
         return String.format("R$%d,%02d", preco / 100, preco % 100);
     }
 }

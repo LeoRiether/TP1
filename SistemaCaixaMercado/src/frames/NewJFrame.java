@@ -41,48 +41,31 @@ public class NewJFrame extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
         countLabel = new javax.swing.JLabel();
-        lessBtn = new javax.swing.JButton();
-        moreBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         countLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        countLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        countLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         countLabel.setText("0");
-
-        lessBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lessBtn.setText("-");
-
-        moreBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        moreBtn.setText("+");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(lessBtn)
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(countLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(moreBtn)
+                .addComponent(countLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(countLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(panelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(countLabel)
-                    .addComponent(lessBtn)
-                    .addComponent(moreBtn))
-                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,8 +125,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel countLabel;
-    private javax.swing.JButton lessBtn;
-    private javax.swing.JButton moreBtn;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables

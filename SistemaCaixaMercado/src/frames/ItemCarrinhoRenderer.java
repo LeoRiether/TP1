@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import sistemacaixamercado.Carrinho;
 import sistemacaixamercado.ItemCarrinho;
 import sistemacaixamercado.Produto;
 
@@ -43,9 +44,12 @@ public class ItemCarrinhoRenderer extends JPanel implements ListCellRenderer {
      * só precisamos fazer o download da imagem uma vez
      */
     private HashMap<String, ImageIcon> cache;
+    
+    private Carrinho carrinho;
 
-    public ItemCarrinhoRenderer() {
+    public ItemCarrinhoRenderer(Carrinho carrinho) {
         cache = new HashMap<>();
+        this.carrinho = carrinho;
 
         setOpaque(true);
         //setHorizontalAlignment(LEFT);
@@ -98,25 +102,14 @@ public class ItemCarrinhoRenderer extends JPanel implements ListCellRenderer {
         // Set text
         var nameLabel = new javax.swing.JLabel();
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        nameLabel.setText(produto.getNome() + " (" + produto.strPreco() + ")");
+        nameLabel.setText(produto.getNome());
         nameLabel.setIcon(image);
 
         var countLabel = new javax.swing.JLabel();
-        var lessBtn = new javax.swing.JButton();
-        var moreBtn = new javax.swing.JButton();
-
+        countLabel.setText(item.getQtd() + " un. (" + Produto.strPreco(carrinho.precoComDesconto(item)) + ")");
+        
         countLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        countLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        countLabel.setText(item.getQtd() + "");
-
-        lessBtn.setFont(new java.awt.Font("Segoe UI", 0, 24));
-        lessBtn.setText("-");
-        lessBtn.addActionListener(evt -> {
-            Warning.show("you have been warned");
-        });
-
-        moreBtn.setFont(new java.awt.Font("Segoe UI", 0, 24));
-        moreBtn.setText("+");
+        countLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         
         this.removeAll();
 
@@ -125,30 +118,21 @@ public class ItemCarrinhoRenderer extends JPanel implements ListCellRenderer {
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(lessBtn)
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(countLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(moreBtn)
+                .addComponent(countLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(countLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(panelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(countLabel)
-                    .addComponent(lessBtn)
-                    .addComponent(moreBtn))
-                .addContainerGap(16, Short.MAX_VALUE))
         );
-
+        
         return this;
     }
 
