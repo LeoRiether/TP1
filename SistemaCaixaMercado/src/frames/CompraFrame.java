@@ -59,6 +59,7 @@ public class CompraFrame extends ChildFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        initAddCombo();
         updateItensList();
         addRng();
     }
@@ -71,12 +72,25 @@ public class CompraFrame extends ChildFrame {
         itensList.setModel(model);
     }
 
+    /**
+     * Coloca o gerador de números aleatórios apropriado nos produtos com desconto
+     */
     private void addRng() {
         Random rng = new Random();
         for (Produto p : produtos) {
             if (p instanceof ProdutoComDesconto) {
                 ((ProdutoComDesconto) p).setRng(rng);
             }
+        }
+    }
+    
+    /**
+     * Inicializa a addComboBox
+     */
+    private void initAddCombo() {
+        addComboBox.removeAllItems();
+        for (Produto p : produtos) {
+            addComboBox.addItem(p.getNome());
         }
     }
 
@@ -122,6 +136,11 @@ public class CompraFrame extends ChildFrame {
         addBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         addBtn.setText("+");
         addBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         doneBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         doneBtn.setText("Concluir");
@@ -199,6 +218,12 @@ public class CompraFrame extends ChildFrame {
         JOptionPane.showMessageDialog(this, "Compra concluída com sucesso!", "", JOptionPane.INFORMATION_MESSAGE);
         close();
     }//GEN-LAST:event_doneBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        int index = addComboBox.getSelectedIndex();
+        carrinho.add(produtos.get(index), 1);
+        updateItensList();
+    }//GEN-LAST:event_addBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;

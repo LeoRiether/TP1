@@ -33,7 +33,6 @@ import sistemacaixamercado.ProdutoComDesconto;
  */
 public class ProdutosFrame extends ChildFrame {
 
-    private final JFrame parent;
     private final BancoDeDados bd;
     private ArrayList<Produto> produtos;
 
@@ -46,7 +45,6 @@ public class ProdutosFrame extends ChildFrame {
      */
     public ProdutosFrame(JFrame parent, BancoDeDados bd, ArrayList<Produto> produtos) {
         super(parent);
-        this.parent = parent;
         this.bd = bd;
         this.produtos = produtos;
         
@@ -56,6 +54,9 @@ public class ProdutosFrame extends ChildFrame {
         initTable();
     }
 
+    /**
+     * Deixa os campos do formulário em branco
+     */
     private void clearFields() {
         JTextField[] fields = new JTextField[]{
             nomeField, descontoField,
@@ -84,7 +85,7 @@ public class ProdutosFrame extends ChildFrame {
         String descontoStr;
         if (p instanceof ProdutoComDesconto) {
             var d = (ProdutoComDesconto) p;
-            descontoStr = d.getDesconto() + " (P = " + d.getProbabilidade() + ")";
+            descontoStr = d.getDesconto() + "% (P = " + d.getProbabilidade() + "%)";
         } else {
             descontoStr = "-";
         }
@@ -339,7 +340,6 @@ public class ProdutosFrame extends ChildFrame {
         try {
             bd.saveProdutos(produtos);
             this.setVisible(false);
-            parent.setVisible(true);
             dispose();
         } catch (IOException ex) {
             Warning.show("Não foi possível salvar as mudanças! Erro: " + ex);

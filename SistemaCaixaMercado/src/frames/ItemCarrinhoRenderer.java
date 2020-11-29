@@ -17,8 +17,10 @@
 package frames;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -32,37 +34,62 @@ import sistemacaixamercado.ItemCarrinho;
  */
 public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
 
+    /**
+     * Guardamos os ícones que já foram vistos colocados no carrinho antes, para
+     * que pegar a imagem correspondente seja mais rápido das próximas vezes.
+     * Isso aumenta bastante a performance caso o ícone venha de uma URL, porque
+     * só precisamos fazer o download da imagem uma vez
+     */
+    private HashMap<String, ImageIcon> cache;
+
     public ItemCarrinhoRenderer() {
+        cache = new HashMap<>();
 
         setOpaque(true);
         setHorizontalAlignment(LEFT);
         setVerticalAlignment(CENTER);
     }
 
+    /**
+     * Retorna a imagem correspondente à string do ícone dada
+     *
+     * @param icon
+     * @return
+     */
+    private ImageIcon getIcon(String icon) {
+        // Ícone vem de um resource
+        var resource = getClass().getResource("/images/produtos/" + icon + ".png");
+        if (resource != null) {
+            return new javax.swing.ImageIcon(resource);
+        }
+        
+        try {
+            // Ícone vem de uma URL
+            var imageIcon = new javax.swing.ImageIcon(new URL(icon));
+            Image image = imageIcon.getImage();
+            Image scaledImage = image.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(scaledImage);
+            return imageIcon;
+        } catch (MalformedURLException e) {
+            // no icon
+            // wasn't meant to be
+            return null;
+        }
+
+    }
+
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        /*if (isSelected) {
-            setBackground(list.getSelectionBackground());
-            setForeground(list.getSelectionForeground());
-        } else {
-            setBackground(list.getBackground());
-            setForeground(list.getForeground());
-        }*/
-
         ItemCarrinho item = (ItemCarrinho) value;
 
         // Set icon
         String icone = item.getProduto().getIcone();
-        var resource = getClass().getResource("/images/produtos/" + icone + ".png");
-        if (resource != null) {
-            setIcon(new javax.swing.ImageIcon(resource));
+        if (cache.containsKey(icone)) {
+            setIcon(cache.get(icone));
         } else {
-            try {
-                setIcon(new javax.swing.ImageIcon(new URL(icone)));
-            } catch (MalformedURLException e) {
-                // no icon
-                // wasn't meant to be
-            }
+            ImageIcon image = getIcon(icone);
+            setIcon(image);
+            cache.put(icone, image);
         }
 
         // Set text
