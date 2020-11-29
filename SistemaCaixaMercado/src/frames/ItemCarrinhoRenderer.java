@@ -24,15 +24,17 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import sistemacaixamercado.ItemCarrinho;
+import sistemacaixamercado.Produto;
 
 /**
  * Componente que renderiza os itens de um carrinho
  *
  * @author Leonardo
  */
-public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
+public class ItemCarrinhoRenderer extends JPanel implements ListCellRenderer {
 
     /**
      * Guardamos os ícones que já foram vistos colocados no carrinho antes, para
@@ -46,8 +48,8 @@ public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
         cache = new HashMap<>();
 
         setOpaque(true);
-        setHorizontalAlignment(LEFT);
-        setVerticalAlignment(CENTER);
+        //setHorizontalAlignment(LEFT);
+        //setVerticalAlignment(CENTER);
     }
 
     /**
@@ -62,7 +64,7 @@ public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
         if (resource != null) {
             return new javax.swing.ImageIcon(resource);
         }
-        
+
         try {
             // Ícone vem de uma URL
             var imageIcon = new javax.swing.ImageIcon(new URL(icon));
@@ -81,20 +83,71 @@ public class ItemCarrinhoRenderer extends JLabel implements ListCellRenderer {
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         ItemCarrinho item = (ItemCarrinho) value;
+        Produto produto = item.getProduto();
 
         // Set icon
-        String icone = item.getProduto().getIcone();
+        String icone = produto.getIcone();
+        ImageIcon image;
         if (cache.containsKey(icone)) {
-            setIcon(cache.get(icone));
+            image = cache.get(icone);
         } else {
-            ImageIcon image = getIcon(icone);
-            setIcon(image);
+            image = getIcon(icone);
             cache.put(icone, image);
         }
 
         // Set text
-        setText(item.getProduto().getNome());
-        setFont(list.getFont());
+        var nameLabel = new javax.swing.JLabel();
+        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        nameLabel.setText(produto.getNome() + " (" + produto.strPreco() + ")");
+        nameLabel.setIcon(image);
+
+        var countLabel = new javax.swing.JLabel();
+        var lessBtn = new javax.swing.JButton();
+        var moreBtn = new javax.swing.JButton();
+
+        countLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        countLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        countLabel.setText(item.getQtd() + "");
+
+        lessBtn.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        lessBtn.setText("-");
+        lessBtn.addActionListener(evt -> {
+            Warning.show("you have been warned");
+        });
+
+        moreBtn.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        moreBtn.setText("+");
+        
+        this.removeAll();
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(this);
+        this.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(lessBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(countLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(moreBtn)
+                .addContainerGap())
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(panelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(countLabel)
+                    .addComponent(lessBtn)
+                    .addComponent(moreBtn))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         return this;
     }
