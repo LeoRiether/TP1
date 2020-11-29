@@ -50,6 +50,9 @@ public class CompraFrame extends ChildFrame {
 
     /**
      * Creates new form CompraFrame
+     * @param parent o frame que criou o CompraFrame
+     * @param produtos os produtos cadastrados
+     * @param cb um callback, chamado quando a compra é finalizada
      */
     public CompraFrame(JFrame parent, ArrayList<Produto> produtos, Callback cb) {
         super(parent);

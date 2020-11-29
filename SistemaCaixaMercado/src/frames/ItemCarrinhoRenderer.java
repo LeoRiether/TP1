@@ -52,8 +52,6 @@ public class ItemCarrinhoRenderer extends JPanel implements ListCellRenderer {
         this.carrinho = carrinho;
 
         setOpaque(true);
-        //setHorizontalAlignment(LEFT);
-        //setVerticalAlignment(CENTER);
     }
 
     /**
