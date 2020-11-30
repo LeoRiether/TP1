@@ -130,6 +130,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void compraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBtnActionPerformed
         new CompraFrame(this, mercado.getProdutos(), carrinho -> {
+            if (carrinho == null) {
+                return;
+            }
+            
             
         }).setVisible(true);
     }//GEN-LAST:event_compraBtnActionPerformed
