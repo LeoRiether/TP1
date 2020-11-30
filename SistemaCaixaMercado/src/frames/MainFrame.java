@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frames;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -10,9 +5,11 @@ import javax.swing.plaf.basic.BasicLookAndFeel;
 import sistemacaixamercado.SistemaCaixaMercado;
 
 class Theme {
+
     static void install() {
         FlatLightLaf.install();
     }
+
     static BasicLookAndFeel theme() {
         return new FlatLightLaf();
     }
@@ -24,6 +21,7 @@ class Theme {
  * @author Leonardo
  */
 public class MainFrame extends javax.swing.JFrame {
+
     private SistemaCaixaMercado mercado;
 
     /**
@@ -32,7 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         mercado = new SistemaCaixaMercado();
         Theme.install();
-        
+
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -133,8 +131,7 @@ public class MainFrame extends javax.swing.JFrame {
             if (carrinho == null) {
                 return;
             }
-            
-            
+
         }).setVisible(true);
     }//GEN-LAST:event_compraBtnActionPerformed
 
@@ -152,7 +149,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        /*try {
+ /*try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

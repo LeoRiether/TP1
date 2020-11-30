@@ -1,5 +1,6 @@
 package sistemacaixamercado;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SistemaCaixaMercado {
@@ -11,7 +12,7 @@ public class SistemaCaixaMercado {
         bd = new BancoDeDados();
         try {
             produtos = bd.loadProdutos();
-        } catch(Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             frames.Warning.show("O arquivo de produtos parece ter sido corrompido! Erro: " + e);
             produtos = new ArrayList<>();
         }
