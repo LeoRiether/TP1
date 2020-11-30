@@ -28,7 +28,7 @@ public class ProdutoComDesconto extends Produto implements Serializable {
     public int aplicarDesconto() {
         int r = rng.nextInt(100);
         if (r < probabilidade) {
-            return Math.round((desconto / 100) * (float) preco);
+            return Math.round((float)preco - (desconto / 100) * (float) preco);
         }
         return preco;
     }
