@@ -359,6 +359,13 @@ public class ProdutosFrame extends ChildFrame {
             p = new Produto(id, preco, nome, icone);
         } else {
             // Produto com desconto
+
+            int prob = Integer.parseInt(sProb);
+            if (prob < 10 || prob > 80) {
+                Warning.show("A probabilidade de desconto deve estar entre 10% e 80%");
+                return;
+            }
+
             p = (Produto) new ProdutoComDesconto(
                     Integer.parseInt(sProb),
                     Float.parseFloat(sDesconto),
