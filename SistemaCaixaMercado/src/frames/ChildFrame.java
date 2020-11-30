@@ -22,10 +22,4 @@ public abstract class ChildFrame extends JFrame {
         super.setVisible(visibility);
         parent.setVisible(!visibility);
     }
-    
-    @Override
-    public void dispose() {
-        parent.setVisible(true);
-        super.dispose();
-    }
 }

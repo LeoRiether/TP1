@@ -3,7 +3,6 @@ package sistemacaixamercado;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Estatísticas dos produtos e dos carrinhos de compras feitas
