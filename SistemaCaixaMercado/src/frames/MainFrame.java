@@ -1,7 +1,11 @@
 package frames;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.plaf.basic.BasicLookAndFeel;
+import sistemacaixamercado.Estatisticas;
 import sistemacaixamercado.SistemaCaixaMercado;
 
 class Theme {
@@ -57,6 +61,11 @@ public class MainFrame extends javax.swing.JFrame {
         estatisticasBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         estatisticasBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/analytics-64.png"))); // NOI18N
         estatisticasBtn.setText("Estatísticas");
+        estatisticasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estatisticasBtnActionPerformed(evt);
+            }
+        });
 
         produtosBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         produtosBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dairy-products-64.png"))); // NOI18N
@@ -70,6 +79,11 @@ public class MainFrame extends javax.swing.JFrame {
         clientesBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         clientesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clients-64.png"))); // NOI18N
         clientesBtn.setText("Clientes");
+        clientesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientesBtnActionPerformed(evt);
+            }
+        });
 
         compraBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         compraBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/online-shopping-64.png"))); // NOI18N
@@ -132,8 +146,29 @@ public class MainFrame extends javax.swing.JFrame {
                 return;
             }
 
+            try {
+                Estatisticas stats = mercado.getBd().loadEstatisticas();
+                stats.addCarrinho(carrinho);
+                mercado.getBd().saveEstatisticas(stats);
+            } catch (IOException ex) {
+                Warning.show("Não foi possível carregar o arquivo de estatísticas!");
+            }
+
         }).setVisible(true);
     }//GEN-LAST:event_compraBtnActionPerformed
+
+    private void estatisticasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estatisticasBtnActionPerformed
+        try {
+            Estatisticas stats = mercado.getBd().loadEstatisticas();
+            new StatsFrame(this, stats).setVisible(true);
+        } catch (IOException ex) {
+            Warning.show("Não foi possível carregar o arquivo de estatísticas!");
+        }
+    }//GEN-LAST:event_estatisticasBtnActionPerformed
+
+    private void clientesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesBtnActionPerformed
+        Warning.show("A área de clientes é um DLC");
+    }//GEN-LAST:event_clientesBtnActionPerformed
 
     /**
      * @param args the command line arguments

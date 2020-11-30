@@ -10,6 +10,7 @@ public class BancoDeDados {
     private static final String dataDir = "bd";
     private static final String produtosFile = dataDir + "/produtos";
     private static final String clientesFile = dataDir + "/clientes";
+    private static final String statsFile = dataDir + "/estatisticas";
 
     public BancoDeDados() {
     }
@@ -40,6 +41,20 @@ public class BancoDeDados {
            return (ArrayList<Produto>) loadFromFile(produtosFile);
         } catch (java.io.FileNotFoundException e) {
             return new ArrayList<>();
+        }
+    }
+    
+    /**
+     * Carrega as estatísticas
+     *
+     * @return Produtos cadastrados
+     * @throws IOException
+     */
+    public Estatisticas loadEstatisticas() throws IOException {
+        try {
+           return (Estatisticas) loadFromFile(statsFile);
+        } catch (java.io.FileNotFoundException | ClassNotFoundException e) {
+            return new Estatisticas();
         }
     }
 
@@ -80,6 +95,16 @@ public class BancoDeDados {
      */
     public void saveProdutos(ArrayList<Produto> produtos) throws IOException {
         saveToFile(produtosFile, produtos);
+    }
+    
+    /**
+     * Salva os produtos cadastrados no banco de dados
+     *
+     * @param stats as estatísticas a serem salvas
+     * @throws IOException
+     */
+    public void saveEstatisticas(Estatisticas stats) throws IOException {
+        saveToFile(statsFile, stats);
     }
 
     /**
