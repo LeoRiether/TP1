@@ -9,6 +9,8 @@ public class SistemaCaixaMercado {
     ArrayList<Produto> produtos;
 
     public SistemaCaixaMercado() {
+
+        // Cria o banco de dados e carrega os produtos
         bd = new BancoDeDados();
         try {
             produtos = bd.loadProdutos();

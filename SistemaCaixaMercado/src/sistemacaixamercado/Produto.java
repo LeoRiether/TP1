@@ -79,6 +79,10 @@ public class Produto implements Serializable {
         return Produto.strPreco(preco);
     }
     
+    /**
+     * @param preco um preço a ser formatado
+     * @return o preço formatado como "R$10,00" ou "R$0,50"
+     */
     public static String strPreco(int preco) {
         return String.format("R$%d,%02d", preco / 100, preco % 100);
     }

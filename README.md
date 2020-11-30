@@ -119,6 +119,9 @@ class MainFrame {
     -SistemaCaixaMercado mercado
 }
 
+MainFrame "1" --> "1" CompraFrame : cria
+MainFrame "1" --> "1" ProdutosFrame : cria
+
 MainFrame "1" --> "1" SistemaCaixaMercado
 
 ```
