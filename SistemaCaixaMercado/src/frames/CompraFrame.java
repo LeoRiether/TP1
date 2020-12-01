@@ -234,7 +234,12 @@ public class CompraFrame extends ChildFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void doneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneBtnActionPerformed
-        JOptionPane.showMessageDialog(this, "Compra concluída com sucesso!", "", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(
+                this, 
+                "Compra concluída com sucesso! Total: " + totalLabel.getText(), 
+                "", 
+                JOptionPane.INFORMATION_MESSAGE
+        );
         close();
     }//GEN-LAST:event_doneBtnActionPerformed
 
